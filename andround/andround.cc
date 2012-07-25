@@ -6,24 +6,20 @@ using namespace std;
 
 typedef long long ll;
 typedef unsigned long long ull;
-typedef ull num;
+typedef int num;
 
 #define pw(i) (1<<(i))
 
 const int MAXT = 50, MAXN = 200005, MAXLOGA = 32;
 int T, N, K;
-num A[MAXN], B[MAXN], psum[MAXLOGA][MAXN];
+num A[3 * MAXN], B[MAXN], psum[MAXLOGA][3 * MAXN];
 int loga;
 
 ifstream fin("andround.in");
 ofstream fout("andround.out");
 
 inline num q(int b, int i, int j) {
-    return psum[b][j] - psum[b][i];
-}
-
-inline int mod(int i, int m) {
-    return (i%m+m)%m;
+    return psum[b][j + N] - psum[b][i + N];
 }
 
 bool on(int b, int i) {
@@ -31,20 +27,20 @@ bool on(int b, int i) {
     if (2 * k + 1 >= N)
         k = N / 2;
     int x = i - k, y = i + k + 1;
-    int sum = (x<0)?(q(b, mod(x, N), N) + q(b, 0, i)):q(b, x, i);
-    sum += (y>N)?(q(b, 0, mod(y, N)) + q(b, i, N)):q(b, i, y);
-    return sum == y - x;
+    return q(b, x, y) = y - x;
 }
 
 void solve(int t) {
     fin >> N >> K;
     for (int i = 0; i < N; ++i)
         fin >> A[i];
+    copy(A, A+N, A+N);
+    copy(A, A+N, A+2*N);
 
     int ma = *max_element(A, A+N);
     for (loga = 0; pw(loga) <= ma; ++loga);
     for (int b = 0; b < loga; ++b)
-        for (int i = 0; i < N; ++i)
+        for (int i = 0; i < 3 * N; ++i)
             psum[b][i + 1] = psum[b][i] + ((pw(b)&A[i])!=0);
 
     for (int b = 0; b < loga; ++b)
