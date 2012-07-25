@@ -32,10 +32,10 @@ bool on(int b, int i) {
 
 void solve(int t) {
     fin >> N >> K;
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N; ++i) {
         fin >> A[i];
-    copy(A, A+N, A+N);
-    copy(A, A+N, A+2*N);
+        A[i + 2 * N] = A[i + N] = A[i];
+    }
 
     int ma = *max_element(A, A+N);
     for (loga = 0; pw(loga) <= ma; ++loga);
@@ -56,7 +56,7 @@ int main() {
         solve(i);
         fout << B[0];
         for (int j = 1; j < N; ++j)
-            fout << ' ' << B[j];
+            fout << '\n' << B[j];
         fout << '\n';
     }
 

@@ -17,7 +17,7 @@ inline int mod(int i, int m) {
 }
 
 ifstream fin("andround.in");
-ofstream fout("andround.out");
+ofstream fout("andround_slo.out");
 
 void solve(int t) {
     fin >> N >> K;
@@ -38,7 +38,7 @@ int main() {
         solve(t);
         fout << B[0];
         for (int i = 1; i < N; ++i)
-            fout << ' ' << B[i];
+            fout << '\n' << B[i];
         fout << '\n';
     }
 
