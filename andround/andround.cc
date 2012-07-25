@@ -27,7 +27,7 @@ bool on(int b, int i) {
     if (2 * k + 1 >= N)
         k = N / 2;
     int x = i - k, y = i + k + 1;
-    return q(b, x, y) = y - x;
+    return q(b, x, y) == y - x;
 }
 
 void solve(int t) {
